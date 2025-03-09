@@ -5,12 +5,6 @@ var cookieParser = require('cookie-parser');
 const cors = require('cors');
 var logger = require('morgan');
 
-app.use(cors({
-  origin: "*",  // Change this to your frontend URL if needed (e.g., "http://localhost:5173")
-  methods: "GET,POST,PUT,DELETE,OPTIONS",
-  allowedHeaders: "Content-Type,Authorization",
-  credentials: true
-}));
 var indexRouter = require('./routes/index');
 
 var app = express();
@@ -20,6 +14,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(
+  cors({
+    origin: '*',
+    methods: 'GET,POST,PUT,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type,Authorization',
+    credentials: true,
+  })
+);
 
 app.use('/', indexRouter);
 
